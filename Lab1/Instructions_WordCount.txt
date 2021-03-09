@@ -1,0 +1,22 @@
+hadoop com.sun.tools.javac.Main WordCount.java
+
+jar cf wc1.jar WordCount*.class
+
+hadoop fs -mkdir /WordCount
+
+hadoop fs -ls /
+
+hadoop fs -mkdir /wordcount/input
+
+//Create a text file with input text in folder
+
+hadoop fs -put inputtextfile.txt /wordcount/input
+//inputtextfile.txt is local file on system, /wordcount/input is hdfs
+
+hadoop fs -ls /wordcount/input
+
+hadoop jar wc1.jar WordCount /wordcount/input/ /wordcount/output
+
+hadoop fs -ls /wordcount/output
+
+hadoop fs -cat /wordcount/output/part-r-00000
