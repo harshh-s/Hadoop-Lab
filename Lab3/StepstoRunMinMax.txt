@@ -1,0 +1,25 @@
+start-all.sh
+
+jps
+
+//save code in the folder
+
+hadoop com.sun.tools.javac.Main MaxMin.java
+
+jar cf file_name.jar MaxMin*.class
+
+hadoop fs -mkdir /harsh/input (if not already there)
+
+hadoop fs -ls /
+
+//Create a text file with input text in folder
+hadoop fs -put inputtextfile.txt /harsh/input
+//inputtextfile.txt is local file on system, /input is hdfs
+
+hadoop fs -ls /harsh/input
+
+hadoop jar wc1.jar Sort /harsh/input/ /harsh/output
+
+hadoop fs -ls /harsh/output
+
+hadoop fs -cat /harsh/output/part-r-00000
