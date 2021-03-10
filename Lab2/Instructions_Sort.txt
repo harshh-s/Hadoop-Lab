@@ -1,0 +1,28 @@
+start-all.sh
+
+jps
+
+get code
+
+hadoop com.sun.tools.javac.Main Sort.java
+
+jar cf wc1.jar Sort*.class
+
+hadoop fs -mkdir /Sort
+
+hadoop fs -ls /
+
+hadoop fs -mkdir /input
+
+//Create a text file with input text in folder
+
+hadoop fs -put inputtextfile.txt /input
+//inputtextfile.txt is local file on system, /input is hdfs
+
+hadoop fs -ls /input
+
+hadoop jar wc1.jar Sort /input/ output
+
+hadoop fs -ls /output
+
+hadoop fs -cat /output/part-r-00000
