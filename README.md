@@ -8,4 +8,8 @@
 
 **Program 4**: *Decision Trees*
 
-**Program 5**: *Apriori Algorithm*
+**Program 5**: *K-means Clustering using MapReduce*
+
+**Program 6**: *Apriori Algorithm*
+
+**Program 7**: *Count missing values in two joined datasets*
