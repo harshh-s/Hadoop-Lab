@@ -1,7 +1,8 @@
 import java.io.*;
 import java.util.*;
 import java.lang.Math;
- class GainRatio
+
+class GainRatio
  {
 	   
 	 int linenumber=0;
@@ -100,7 +101,7 @@ import java.lang.Math;
 	  FileInputStream fstream;
 	try {
 		
-		fstream = new FileInputStream("outputfile_"+id.current_index+".txt");
+		fstream = new FileInputStream("/harsh/output/dt/intermediate"+id.current_index+".txt");
 			
 		  DataInputStream in = new DataInputStream(fstream);
 		  BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -227,4 +228,4 @@ import java.lang.Math;
 			 
 		 }
 	  
-		}
+}

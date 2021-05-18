@@ -14,12 +14,19 @@ import org.apache.hadoop.mapred.JobConf;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+
+
 public class C45 extends Configured implements Tool {
 
-	public static Split currentsplit=new Split();
-	public static List <Split> splitted=new ArrayList<Split>();;
-	public static int current_index=0;
-	public static void main(String[] args) throws Exception {
+
+    public static Split currentsplit=new Split();
+    
+    public static List <Split> splitted=new ArrayList<Split>();;
+    
+    public static int current_index=0;
+
+  public static void main(String[] args) throws Exception {
+	 
 	  MapClass mp=new MapClass();
 	  splitted.add(currentsplit);
 	  
@@ -155,7 +162,7 @@ public class C45 extends Configured implements Tool {
 	    try {
 
 	            
-	    	BufferedWriter bw = new BufferedWriter(new FileWriter(new File("rule.txt"), true));    
+	    	BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/harsh/input/dt/rule.txt"), true));    
 	    	bw.write(text);
 	            bw.newLine();
 	            bw.close();
@@ -165,29 +172,24 @@ public class C45 extends Configured implements Tool {
   
   
   
-public int run(String[] args) throws Exception {
-	JobConf conf = new JobConf(getConf(),C45.class);
-	conf.setJobName("Id3");
-	//Job job = Job.getInstance(conf, "decision tree");
+  public int run(String[] args) throws Exception {
+    JobConf conf = new JobConf(getConf(),C45.class);
+    conf.setJobName("Id3");
 
-	// the keys are words (strings)
-	conf.setOutputKeyClass(Text.class);
-	// the values are counts (ints)
-	conf.setOutputValueClass(IntWritable.class);
+    // the keys are words (strings)
+    conf.setOutputKeyClass(Text.class);
+    // the values are counts (ints)
+    conf.setOutputValueClass(IntWritable.class);
 
-	conf.setMapperClass(MapClass.class);
-	conf.setReducerClass(Reduce.class);
+    conf.setMapperClass(MapClass.class);
+    conf.setReducerClass(Reduce.class);
 
 
 	//set your input file path below
-	//FileInputFormat.setInputPaths(conf, "inputdt.txt");
-	//FileOutputFormat.setOutputPath(conf, "outputfiledt.txt");
+    FileInputFormat.setInputPaths(conf, "/harsh/input/dt/playtennis.txt");
+    FileOutputFormat.setOutputPath(conf, new Path("/harsh/output/dt/output"+current_index));
 
-	// FileInputFormat.addInputPath(job, new Path(args[0]));
-    	// FileOutputFormat.setOutputPath(job, new Path(args[1]));
-    	// System.exit(job.waitForCompletion(true) ? 0 : 1);
-	JobClient.runJob(conf);
-	return 0;
+    JobClient.runJob(conf);
+    return 0;
+  }
 }
-}
-

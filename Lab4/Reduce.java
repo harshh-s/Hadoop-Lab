@@ -14,33 +14,39 @@ import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.Reducer;
 import org.apache.hadoop.mapred.Reporter;
 
-public  class Reduce extends MapReduceBase implements Reducer<Text, IntWritable, Text, IntWritable> {
+public  class Reduce extends MapReduceBase
+implements Reducer<Text, IntWritable, Text, IntWritable> {
 	
-  public void reduce(Text key, Iterator<IntWritable> values,
-                    OutputCollector<Text, IntWritable> output,
-                    Reporter reporter) throws IOException {
-    int sum = 0;
-    String line = key.toString();
-    StringTokenizer itr = new StringTokenizer(line);
-    while (values.hasNext()) {
-      sum += values.next().get();
-    }
-    output.collect(key, new IntWritable(sum));
-    writeToFile(key+" "+sum);
-    int index=Integer.parseInt(itr.nextToken());
-    String value=itr.nextToken();
-    String classLabel=itr.nextToken();
-    int count=sum;
-  }
 
-  public static void writeToFile(String text) {
-      try {
-        C45 id=new C45();
-        BufferedWriter bw = new BufferedWriter(new FileWriter(new File("outputfile_"+id.current_index+".txt"), true));    
-        bw.write(text);
-              bw.newLine();
-              bw.close();
-      } catch (Exception e) {
-      }
+public void reduce(Text key, Iterator<IntWritable> values,
+                   OutputCollector<Text, IntWritable> output,
+                   Reporter reporter) throws IOException {
+  int sum = 0;
+  String line = key.toString();
+  StringTokenizer itr = new StringTokenizer(line);
+  while (values.hasNext()) {
+    sum += values.next().get();
   }
+    output.collect(key, new IntWritable(sum));
+	  writeToFile(key+" "+sum);
+	  int index=Integer.parseInt(itr.nextToken());
+	  String value=itr.nextToken();
+	  String classLabel=itr.nextToken();
+	  int count=sum;
+	
+ }
+
+public static void writeToFile(String text) {
+    try {
+    	
+    	C45 id=new C45();
+
+    	BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/harsh/output/dt/intermediate"+id.current_index+".txt"), true));    
+    	bw.write(text);
+            bw.newLine();
+            bw.close();
+    } catch (Exception e) {
+    }
+}
+
 }
