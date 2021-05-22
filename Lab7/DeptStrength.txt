@@ -1,0 +1,5 @@
+Dept_ID	Total_Employee
+A11	50
+B12	100
+C13	250
+
